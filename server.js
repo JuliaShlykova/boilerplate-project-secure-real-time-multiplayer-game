@@ -17,6 +17,19 @@ app.use('/assets', express.static(process.cwd() + '/assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.set('x-powered-by', "PHP 7.4.3");
+
+app.use(helmet({
+  xContentTypeOptions: 'nosniff', //default
+  xXssProtection: true, //obsolete
+  hidePoweredBy: {
+    setTo: 'PHP 7.4.3',
+  },
+  noCache: true
+}));
+
+
+
 //For FCC testing purposes and enables user to connect from outside the hosting platform
 app.use(cors({origin: '*'})); 
 
